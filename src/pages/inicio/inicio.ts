@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams , ModalController} from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
 import { Platform } from 'ionic-angular';
+import { ModalNuevoSitioPage } from '../modal-nuevo-sitio/modal-nuevo-sitio';
+
 
 declare var google: any;
 
@@ -24,6 +26,7 @@ coords : any = { lat: 0, lng: 0 }
   constructor(
   public navCtrl: NavController,
   public navParams: NavParams,
+  public modalCtrl : ModalController,
   public  platform: Platform) {
 
         platform.ready().then(() => {
@@ -33,14 +36,12 @@ coords : any = { lat: 0, lng: 0 }
 
   }
 
-
-
   obtenerPosicion():any{
     Geolocation.getCurrentPosition().then(res => {
       this.coords.lat = res.coords.latitude;
       this.coords.lng = res.coords.longitude;
 
-      this.loadMap();
+      this.initMap();
     })
     .catch(
       (error)=>{
@@ -50,13 +51,25 @@ coords : any = { lat: 0, lng: 0 }
   }
 
 
+  initMap() {
+    var myLatLng = {lat: -25.363, lng: 131.044};
 
-  loadMap(){
-     let mapContainer = document.getElementById('map');
-      this.map = new google.maps.Map(mapContainer, {
-        center: this.coords,
-        zoom: 12
-      });
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 4,
+      center: myLatLng
+    });
+
+     var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      title: 'Hello World!'
+    });
+  }
+
+  nuevoSitio(){
+    // aquí vamos a abrir el modal para añadir nuestro sitio.
+     let mimodal = this.modalCtrl.create( ModalNuevoSitioPage,this.coords );
+     mimodal.present();
   }
 
 

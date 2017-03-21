@@ -6,6 +6,7 @@ import { MistabsPage } from '../pages/mistabs/mistabs';
 import { InicioPage } from '../pages/inicio/inicio';
 import { ListadosPage } from '../pages/listados/listados';
 import { InfoPage } from '../pages/info/info';
+import { ModalNuevoSitioPage } from '../pages/modal-nuevo-sitio/modal-nuevo-sitio';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { InfoPage } from '../pages/info/info';
     MistabsPage,
     InicioPage,
     ListadosPage,
-    InfoPage
+    InfoPage,
+    ModalNuevoSitioPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -26,7 +28,8 @@ import { InfoPage } from '../pages/info/info';
     MistabsPage,
     InicioPage,
     ListadosPage,
-    InfoPage
+    InfoPage,
+    ModalNuevoSitioPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
