@@ -23,6 +23,7 @@ export class InicioPage {
 map: any; // Manejador del mapa.
 coords : any = { lat: 0, lng: 0 }
 
+
   constructor(
   public navCtrl: NavController,
   public navParams: NavParams,
@@ -41,7 +42,7 @@ coords : any = { lat: 0, lng: 0 }
       this.coords.lat = res.coords.latitude;
       this.coords.lng = res.coords.longitude;
 
-      this.initMap();
+      this.initMap(this.coords.lat, this.coords.lng);
     })
     .catch(
       (error)=>{
@@ -51,8 +52,8 @@ coords : any = { lat: 0, lng: 0 }
   }
 
 
-  initMap() {
-    var myLatLng = {lat: -25.363, lng: 131.044};
+  initMap(a, b) {
+    var myLatLng = {lat: a, lng: b};
 
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 4,
